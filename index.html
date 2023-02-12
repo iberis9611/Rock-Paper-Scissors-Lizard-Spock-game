@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <title>Frontend Mentor | Rock, Paper, Scissors</title>
+  <link rel="stylesheet" href="./dist/style.css">
+  <script type="module" src="./js/index.js"></script>
+</head>
+<body>
+  <header class="header">
+    <h3 class="header__h3">
+      ROCK<br />PAPER<br />SCISSORS<br />LIZARD<br />SPOCK<br />
+    </h3>
+    <article class="header__article">
+      <h3 class="header__h3 header__h3-blue">SCORE</h3>
+      <h2 class="header__h2">0</h2>
+    </article>
+  </header>
+  <main class="main">
+    <form class="main__form" data-multi-step>
+      <div class="main__form__card active" data-step>
+        <div class="pick">
+          <button class="circle__button circle" type="button" id="spock"><span class="inside circle"></span></button>
+          <button class="circle__button circle" type="button" id="scissors"><span class="inside circle"></span></button>
+          <button class="circle__button circle" type="button" id="paper"><span class="inside circle"></span></button>
+          <button class="circle__button circle" type="button" id="rock"><span class="inside circle"></span></button>
+          <button class="circle__button circle" type="button" id="lizard"><span class="inside circle"></span></button>
+        </div>
+      </div>
+      <div class="main__form__card" data-step>
+        <div class="result">
+          <div class="result__upper">
+            <div class="picked picked__you">
+              <div class="picked__item picked__item__you circle"><span class="front__you circle inside"></span></div>
+              <p class="picked__p">YOU PICKED</p>
+            </div>
+            <div class="picked picked__house">
+              <div class="picked__item picked__item__house circle"><span class="front__house circle inside"></span></div>
+              <p class="picked__p">THE HOUSE PICKED</p>
+            </div>
+          </div>
+          <div class="result__lower">
+            <h1 class="result__lower__h1"></h1>
+            <button class="result__lower__button" type="button" data-previous>PLAY AGAIN</button>
+          </div>
+        </div>
+      </div>
+    </form>
+    
+  </main>
+  <footer class="footer">
+    <button class="footer__button">RULES</button>
+    <div class="rule">
+      <figure class="footer__figure">
+        <img src="images/image-rules-bonus.svg" alt="game-rules">
+        <figcaption class="footer__figcaption">
+          <p class="footer__p">RULES</p>
+          <svg class="footer__svg" xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path fill="#3B4262" fill-rule="evenodd" d="M16.97 0l2.122 2.121-7.425 7.425 7.425 7.425-2.121 2.12-7.425-7.424-7.425 7.425L0 16.97l7.425-7.425L0 2.121 2.121 0l7.425 7.425L16.971 0z" opacity=".25"/></svg>
+        </figcaption>
+      </figure>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,54 @@
+@use '../utils' as u;
+
+.footer {
+
+    &__button {
+        width: u.rem(126);
+        height: u.rem(40);
+        border: u.rem(1) solid hsl(0, 0%, 100%);
+        border-radius: u.rem(5);
+        background-color: transparent;
+        color: hsl(0, 0%, 100%);
+    }
+
+    .rule {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: hsla(0, 0%, 7%, 0.6);
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: scale(0);
+        transition-duration: 0.2s;
+        transition-timing-function: linear;
+    }
+
+    .showRule {
+        transform: scale(1);
+        transition-duration: 0.2s;
+        transition-timing-function: linear;
+    }
+
+    &__figure {
+        width: min(90%, 400px);
+        background-color: hsl(0, 0%, 100%);
+        border-radius: u.rem(5);
+        display: flex;
+        flex-direction: column;
+        padding: u.rem(36) u.rem(32);
+    }
+
+    &__figcaption {
+        order: -1;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__p {
+        color: hsl(229, 25%, 31%);
+        font-size: u.rem(24);
+    }
+}

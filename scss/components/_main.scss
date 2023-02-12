@@ -1,0 +1,29 @@
+@use '../utils' as u;
+
+.main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    @include u.breakpoint(large) { 
+        width: 71.55%;
+    }
+    &__form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: u.rem(64);
+        width: 100%;
+
+        &__card {
+            width: 100%;
+            display: none;
+        }
+        
+        .active {
+            display: block;
+        }
+    }
+}

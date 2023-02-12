@@ -1,0 +1,108 @@
+@use '../utils' as u;
+
+.pick {
+    width: u.rem(200);
+    height: u.rem(200);
+    background-image: url("../images/bg-pentagon.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    margin: 0 auto;
+
+    @include u.breakpoint(large) { 
+        width: u.rem(320);
+        height: u.rem(320);
+    }
+    
+    .circle__button {
+        border: u.rem(1) solid transparent;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .circle__button:active .inside {
+        transform: translateY(u.rem(-2));
+        transition-duration: 0.2s;
+        transition-timing-function: linear;
+    }
+    
+    .circle__button:first-child {
+        background-color: hsl(189, 59%, 40%);
+        left: u.rem(-48);
+        top: u.rem(24);
+
+        @include u.breakpoint(large) { 
+            left: u.rem(-72);
+            top: u.rem(36);
+        }
+    }
+    
+    .circle__button:first-child .inside {
+        background-image: url("../images/icon-spock.svg");
+        border-color: hsl(189, 58%, 53%);
+    }
+    
+    .circle__button:nth-child(2) {
+        background-color: hsl(40, 84%, 40%);
+        top: u.rem(-48);
+        right: u.rem(48);
+
+        @include u.breakpoint(large) { 
+            top: u.rem(-72);
+            right: u.rem(72);
+        }
+    }
+    
+    .circle__button:nth-child(2) .inside {
+        background-image: url("../images/icon-scissors.svg");
+        border-color: hsl(40, 84%, 53%);
+    }
+    
+    .circle__button:nth-child(3) {
+        background-color: hsl(230, 89%, 40%);
+        right: u.rem(-48);
+        top: u.rem(24);
+
+        @include u.breakpoint(large) { 
+            right: u.rem(-72);
+            top: u.rem(36);
+        }
+    }
+    
+    .circle__button:nth-child(3) .inside {
+        background-image: url("../images/icon-paper.svg");
+        border-color: hsl(230, 89%, 65%);
+    }
+    
+    .circle__button:nth-child(4) {
+        background-color: hsl(349, 71%, 40%);
+        right: u.rem(-24);
+        bottom: u.rem(-48);
+
+        @include u.breakpoint(large) { 
+            bottom: u.rem(-72);
+        }
+    }
+    
+    .circle__button:nth-child(4) .inside {
+        background-image: url("../images/icon-rock.svg");
+        border-color: hsl(349, 70%, 56%);
+    }
+    
+    .circle__button:last-child {
+        background-color: hsl(261, 72%, 40%);
+        bottom: u.rem(-48);
+
+        @include u.breakpoint(large) { 
+            bottom: u.rem(-72);
+        }
+    }
+    
+    .circle__button:last-child .inside {
+        background-image: url("../images/icon-lizard.svg");
+        border-color: hsl(261, 72%, 63%);
+    }
+}
