@@ -2,12 +2,6 @@
 
 .footer {
 
-    // @include u.breakpoint(large) { 
-    //     position: absolute;
-    //     bottom: u.rem(25);
-    //     right: u.rem(30);
-    // }
-
     &__button {
         width: u.rem(126);
         height: u.rem(40);
@@ -41,6 +35,7 @@
 
     .rule {
         height: 100%;
+        width: 100%;
         background-color: hsl(0, 0%, 100%);
         display: flex;
         flex-direction: column;
@@ -64,7 +59,7 @@
     }
 
     &__figcaption {
-      
+        transform: scale(0);
     }
 
     &__p {

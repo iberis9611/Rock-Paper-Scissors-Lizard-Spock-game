@@ -15,7 +15,8 @@ const loadingCircle = document.getElementsByClassName("loading");
 const playerLoopingCircles = [...loadingCircle[0].getElementsByTagName("span")];
 const houseLoopingCircles = [...loadingCircle[1].getElementsByTagName("span")];
 const innerBoxShadow = window.getComputedStyle(playerInnerCircle, null).getPropertyValue("box-shadow");
-
+let resultStr = '';
+let score = 0;  
 // If there is no active class, findIndex will return -1.
 let currentStep = formSteps.findIndex(step => {
     return step.classList.contains("active")
@@ -53,8 +54,10 @@ crossButton.addEventListener("click", e => {
     rulePanel.classList.remove("showRule")
 });
 
-let score = 0;
-let resultStr = '';
+if(sessionStorage.getItem("myScore") && sessionStorage.getItem("myScore") !== resultScore.textContent) {
+    resultScore.textContent = sessionStorage.getItem("myScore")
+}
+
 circleButtons.forEach(btn => {
     btn.addEventListener("click", e => {
         const playerChoice = e.currentTarget.id;
@@ -62,13 +65,14 @@ circleButtons.forEach(btn => {
         const result = getGameResult(playerChoice, houseChoice);
         resultStr = getResultStr(result);
         score += result;
+        sessionStorage.setItem("myScore", score);
 
         showPlaysChoice(e); 
         setTimeout(() => {
             showHousesChoice(houseChoice);
         }, 1500)
         setTimeout(() => {
-            resultScore.textContent = score;
+            resultScore.textContent = sessionStorage.getItem("myScore");
             gameResult.textContent = resultStr;
             resultPanel.style.display ="flex";
             resultPanel.style.opacity = "1";
@@ -96,7 +100,7 @@ const clearStyle = () => {
     if (window.innerWidth >= 1024) {
         resultPanel.style.display = "none";
     }
-}
+};
 
 const showDeepLoopingCircles = (result) => {
     if (result === 1) {
@@ -109,7 +113,7 @@ const showDeepLoopingCircles = (result) => {
             circle.style.animationPlayState = "running";
         })
     }
-}
+};
 
 const housePick = () => {
     let housePick;

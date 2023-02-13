@@ -4,6 +4,7 @@
     width: u.rem(96);
     height: u.rem(96);
     border-radius: 50%;
+    color: transparent;
 
     @include u.breakpoint(large) { 
         width: u.rem(144);
@@ -73,14 +74,19 @@
     0% {
         width: 0;
         height: 0;
-        opacity: 1;
+        opacity: 0;
         box-shadow: inset 0 0 50px hsla(237, 82%, 37%, 0.1);
     }
     
+    50% {
+        opacity: 0.3;
+        box-shadow: inset 0 0 50px hsla(0, 0%, 100%, 0.8);
+    }
+
     100% {
         width: 100%;
         height: 100%;
         opacity: 0;
-        box-shadow: inset 0 0 50px hsla(0, 0%, 100%, 0.8);
+        box-shadow: inset 0 0 50px hsla(237, 82%, 37%, 0.1);
     }
 }

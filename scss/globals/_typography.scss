@@ -5,7 +5,7 @@ h1 {
     letter-spacing: u.rem(3);
 
     @include u.breakpoint(large) {
-        font-size: u.rem(60);
+        font-size: u.rem(55);
     }
 }
 
@@ -22,5 +22,11 @@ h3 {
 
     @include u.breakpoint(large) {
        font-size: u.rem(20);
+    }
+}
+
+p {
+    @include u.breakpoint(large) { 
+        font-size: u.rem(24);
     }
 }
