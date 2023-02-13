@@ -54,10 +54,6 @@ crossButton.addEventListener("click", e => {
     rulePanel.classList.remove("showRule")
 });
 
-if(sessionStorage.getItem("myScore") && sessionStorage.getItem("myScore") !== resultScore.textContent) {
-    resultScore.textContent = sessionStorage.getItem("myScore")
-}
-
 circleButtons.forEach(btn => {
     btn.addEventListener("click", e => {
         const playerChoice = e.currentTarget.id;
@@ -65,14 +61,13 @@ circleButtons.forEach(btn => {
         const result = getGameResult(playerChoice, houseChoice);
         resultStr = getResultStr(result);
         score += result;
-        sessionStorage.setItem("myScore", score);
 
         showPlaysChoice(e); 
         setTimeout(() => {
             showHousesChoice(houseChoice);
         }, 1500)
         setTimeout(() => {
-            resultScore.textContent = sessionStorage.getItem("myScore");
+            resultScore.textContent = score;
             gameResult.textContent = resultStr;
             resultPanel.style.display ="flex";
             resultPanel.style.opacity = "1";
