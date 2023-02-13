@@ -2,16 +2,19 @@ const multiStepForm = document.querySelector("[data-multi-step]");
 const formSteps = [...multiStepForm.querySelectorAll("[data-step]")];
 const circleButtons = document.querySelectorAll(".circle__button");
 const resultScore = document.querySelector(".header__h2");
-const gameResult = document.querySelector(".result__lower__h1")
-const youCircle = document.querySelector(".picked__item__you");
-const youCircleFront = document.querySelector(".front__you");
-const houseCircle = document.querySelector(".picked__item__house");
-const houseCircleFront = document.querySelector(".front__house");
+const gameResult = document.querySelector(".result__h1")
 const ruleButton = document.querySelector(".footer__button");
-const rulePanel = document.querySelector(".rule");
+const rulePanel = document.querySelector(".footer__container");
 const crossButton = document.querySelector(".footer__svg");
-const resultPanel = document.querySelector(".result__lower");
-console.log(resultPanel)
+const resultPanel = document.querySelector(".result__playAgain");
+const playerCircle = document.querySelector(".playerCircle");
+const playerInnerCircle = document.querySelector(".playerInnerCircle");
+const houseCircle = document.querySelector(".houseCircle");
+const houseInnerCircle = document.querySelector(".houseInnerCircle");
+const loadingCircle = document.getElementsByClassName("loading");
+const playerLoopingCircles = [...loadingCircle[0].getElementsByTagName("span")];
+const houseLoopingCircles = [...loadingCircle[1].getElementsByTagName("span")];
+const innerBoxShadow = window.getComputedStyle(playerInnerCircle, null).getPropertyValue("box-shadow");
 
 // If there is no active class, findIndex will return -1.
 let currentStep = formSteps.findIndex(step => {
@@ -26,9 +29,10 @@ if (currentStep < 0) {
 // Add click event listener to the form buttons so we can toggle between pages.
 multiStepForm.addEventListener("click", e => {
     if (e.target.matches("[data-previous]")) {
-        currentStep -= 1
+        currentStep -= 1;
+        clearStyle();
     } else {
-        currentStep += 1
+        currentStep += 1;
     }
     showCurrentStep()
 })
@@ -51,41 +55,61 @@ crossButton.addEventListener("click", e => {
 
 let score = 0;
 let resultStr = '';
-let intervalId;
-let opacity = 0;
 circleButtons.forEach(btn => {
     btn.addEventListener("click", e => {
         const playerChoice = e.currentTarget.id;
         const houseChoice = housePick();
         const result = getGameResult(playerChoice, houseChoice);
         resultStr = getResultStr(result);
-        gameResult.textContent = resultStr;
+        score += result;
 
-        showPlaysChoice(e);
-        showHousesChoice(houseChoice);
-        fadeIn();
-        
+        showPlaysChoice(e); 
         setTimeout(() => {
-            score += result;
+            showHousesChoice(houseChoice);
+        }, 1500)
+        setTimeout(() => {
             resultScore.textContent = score;
-        }, 2000);
+            gameResult.textContent = resultStr;
+            resultPanel.style.display ="flex";
+            resultPanel.style.opacity = "1";
+
+            setTimeout(() => {
+                showDeepLoopingCircles(result);
+            }, 1000)
+        }, 3000)
     })
 });
 
-const fadeIn = () => {
-    intervalId = setInterval(display, 128);
-};
-
-const display = () => {
-    opacity = Number(window.getComputedStyle(houseCircle, null).getPropertyValue("opacity"));
-    if (opacity < 1) {
-        opacity += 0.1
-        houseCircle.style.opacity = opacity;
-    } else {
-        opacity = 0;
-        clearInterval(intervalId);
+const clearStyle = () => {
+    houseCircle.style.backgroundColor = "transparent";
+    houseInnerCircle.style.backgroundColor = "hsla(0, 0%, 0%, 0.1)";
+    houseInnerCircle.style.borderColor = "transparent";
+    houseInnerCircle.style.backgroundImage = "none";
+    houseInnerCircle.style.boxShadow = "none";
+    playerLoopingCircles.forEach(circle => {
+        circle.style.animationPlayState = "paused";
+    })
+    houseLoopingCircles.forEach(circle => {
+        circle.style.animationPlayState = "paused";
+    })
+    resultPanel.style.opacity = "0";
+    if (window.innerWidth >= 1024) {
+        resultPanel.style.display = "none";
     }
-};
+}
+
+const showDeepLoopingCircles = (result) => {
+    if (result === 1) {
+        playerLoopingCircles.forEach(circle => {
+            circle.style.animationPlayState = "running";
+        })
+    }
+    if (result === -1) {
+        houseLoopingCircles.forEach(circle => {
+            circle.style.animationPlayState = "running";
+        })
+    }
+}
 
 const housePick = () => {
     let housePick;
@@ -165,7 +189,7 @@ const getResultStr = (result) => {
     } else if (result === 0) {
         str = 'TIE GAME';
     } else {
-        str = 'THE HOUSE WINS';
+        str = 'YOU LOSE';
     }
     return str;
 };
@@ -174,10 +198,10 @@ const showPlaysChoice = (e) => {
     const backgroundColor = window.getComputedStyle(e.currentTarget ,null).getPropertyValue('background-color');
     const borderColor = window.getComputedStyle(e.target ,null).getPropertyValue('border-color');
     const bgImage = window.getComputedStyle(e.target ,null).getPropertyValue('background-image');
-    youCircle.style.backgroundColor = backgroundColor;
-    youCircleFront.style.backgroundColor = "#fff";
-    youCircleFront.style.borderColor = borderColor;
-    youCircleFront.style.backgroundImage = bgImage;
+    playerCircle.style.backgroundColor = backgroundColor;
+    playerInnerCircle.style.backgroundColor = "#fff";
+    playerInnerCircle.style.borderColor = borderColor;
+    playerInnerCircle.style.backgroundImage = bgImage;
 };
 
 const showHousesChoice = (houseChoice) => {
@@ -187,8 +211,8 @@ const showHousesChoice = (houseChoice) => {
     const borderColor2 = window.getComputedStyle(houseButtonFront ,null).getPropertyValue('border-color');
     const bgImage2 = window.getComputedStyle(houseButtonFront ,null).getPropertyValue('background-image');
     houseCircle.style.backgroundColor = backgroundColor2;
-    houseCircleFront.style.backgroundColor = "#fff";
-    houseCircleFront.style.borderColor = borderColor2;
-    houseCircleFront.style.backgroundImage = bgImage2;
-    houseCircle.style.opacity = 0;
+    houseInnerCircle.style.backgroundColor = "#fff";
+    houseInnerCircle.style.borderColor = borderColor2;
+    houseInnerCircle.style.backgroundImage = bgImage2;
+    houseInnerCircle.style.boxShadow = innerBoxShadow;
 };

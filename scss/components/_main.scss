@@ -8,7 +8,7 @@
     text-align: center;
 
     @include u.breakpoint(large) { 
-        width: 71.55%;
+        width: 90%;
     }
     &__form {
         display: flex;

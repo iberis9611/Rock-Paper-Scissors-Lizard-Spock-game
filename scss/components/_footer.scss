@@ -2,6 +2,12 @@
 
 .footer {
 
+    // @include u.breakpoint(large) { 
+    //     position: absolute;
+    //     bottom: u.rem(25);
+    //     right: u.rem(30);
+    // }
+
     &__button {
         width: u.rem(126);
         height: u.rem(40);
@@ -9,46 +15,66 @@
         border-radius: u.rem(5);
         background-color: transparent;
         color: hsl(0, 0%, 100%);
+
+        @include u.breakpoint(large) { 
+            position: absolute;
+            right: u.rem(30);
+            bottom: u.rem(25);
+        }
     }
 
-    .rule {
+    &__container {
         position: absolute;
         width: 100%;
         height: 100%;
-        background-color: hsla(0, 0%, 7%, 0.6);
         top: 0;
         left: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        background-color: hsla(0, 0%, 7%, 0.6);
         transform: scale(0);
         transition-duration: 0.2s;
         transition-timing-function: linear;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+    }
+
+    .rule {
+        height: 100%;
+        background-color: hsl(0, 0%, 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+
+        @include u.breakpoint(large) { 
+            width: u.rem(400);
+            height: u.rem(460);
+            border-radius: u.rem(5);
+            flex-flow: row wrap;
+            justify-content: space-between;
+            padding-inline: u.rem(32);
+        }
+    }
+
+    &__figure {
+        @include u.breakpoint(large) {  
+            order: 1;
+        }
+    }
+
+    &__figcaption {
+      
+    }
+
+    &__p {
+        color: hsl(229, 25%, 31%);
+        font-size: u.rem(24);
     }
 
     .showRule {
         transform: scale(1);
         transition-duration: 0.2s;
         transition-timing-function: linear;
-    }
-
-    &__figure {
-        width: min(90%, 400px);
-        background-color: hsl(0, 0%, 100%);
-        border-radius: u.rem(5);
-        display: flex;
-        flex-direction: column;
-        padding: u.rem(36) u.rem(32);
-    }
-
-    &__figcaption {
-        order: -1;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    &__p {
-        color: hsl(229, 25%, 31%);
-        font-size: u.rem(24);
     }
 }

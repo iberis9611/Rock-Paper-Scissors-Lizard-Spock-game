@@ -14,9 +14,73 @@
 .inside {
     display: block;
     background-color: hsl(0, 0%, 100%);
-    border: u.rem(16) solid transparent;
+    border: u.rem(11) solid transparent;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 50%;
-    transform: translateY(u.rem(-5));
+    transform: translateY(u.rem(-3));
+    box-shadow: inset 0 u.rem(3) u.rem(3) hsla(0, 1%, 60%, 0.8);
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.loading {
+    position: relative;
+    width: u.rem(288);
+    height: u.rem(288);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include u.breakpoint(large) { 
+        width: u.rem(754);
+        height: u.rem(754);
+    }
+}
+
+.loading span {
+    position: absolute;
+    border-radius: 50%;
+    animation: deep-looping-circle 2.5s linear infinite;
+    animation-play-state: paused;
+}
+
+.loading span:nth-child(1) {
+    animation-delay: 0s;
+}
+.loading span:nth-child(2) {
+    animation-delay: 0.5s;
+}
+.loading span:nth-child(3) {
+    animation-delay: 1s;
+}
+.loading span:nth-child(4) {
+    animation-delay: 1.5s;
+}
+.loading span:nth-child(5) {
+    animation-delay: 2s;
+}
+.loading span:nth-child(5) {
+    animation-delay: 0s;
+}
+
+@keyframes deep-looping-circle {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 1;
+        box-shadow: inset 0 0 50px hsla(237, 82%, 37%, 0.1);
+    }
+    
+    100% {
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        box-shadow: inset 0 0 50px hsla(0, 0%, 100%, 0.8);
+    }
 }

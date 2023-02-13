@@ -1,7 +1,7 @@
 @use '../utils' as u;
 
 .header {
-    width: 53.43%;
+    width: 100%;
     border: u.rem(2) solid hsl(217, 16%, 45%);
     padding-block: u.rem(10);
     padding-inline: u.rem(20) u.rem(8);
@@ -11,6 +11,7 @@
     border-radius: u.rem(5);
 
     @include u.breakpoint(large) {
+        width: 53.43%;
         padding-inline: u.rem(30) u.rem(22);
         padding-block: u.rem(20);
         border-radius: u.rem(10);
@@ -22,15 +23,22 @@
 
 
     &__h3 {
+        line-height: 1.5;
+
+        @include u.breakpoint(large) { 
+            line-height: normal;
+        }
         &-blue {
             color: hsl(229, 64%, 46%);
             font-weight: 600;
+            letter-spacing: u.rem(1);
         }
     }
 
     &__article {
         background-color: hsl(0, 0%, 100%);
         width: u.rem(80);
+        padding-block: u.rem(12) u.rem(6);
         height: 100%;
         border-radius: u.rem(5);
         display: flex;

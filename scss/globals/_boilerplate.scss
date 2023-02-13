@@ -20,7 +20,7 @@ image {
 }
 
 body {
-    height: 100vh;
+    height: max(u.rem(600), 100vh);
     font-family: u.$font;
     font-size: u.rem(16);
     background-image: linear-gradient(hsl(214, 47%, 23%), hsl(237, 49%, 15%));
@@ -32,10 +32,11 @@ body {
     padding: u.rem(30) u.rem(30) u.rem(54);
 
     @include u.breakpoint(large) {
+        height: max(u.rem(808), 100vh);
         padding-bottom: u.rem(90);
         padding: u.rem(40) u.rem(28) u.rem(130);
-        position: relative;
-        justify-content: space-around;
+        justify-content: flex-start;
+        gap: u.rem(180);
     }
 }
 
